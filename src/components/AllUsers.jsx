@@ -68,7 +68,7 @@ const AllUsers = () => {
                 <Button
                   variant="contained"
                   style={{ marginRight: "10px" }}
-                  component={Link}
+                  component={Link}  
                   to={`/edit/${user.userId}`}
                 >
                   Edit

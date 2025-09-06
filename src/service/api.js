@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const URL = "https://entrybackend.onrender.com";
+const URL = process.env.REACT_APP_API_URL || "http://localhost:8000";
 
 export const addUser = async (data) => {
   try {
@@ -14,7 +14,7 @@ export const getUsers = async () => {
   try {
     return await axios.get(`${URL}/all`);
   } catch (error) {
-    console.log("error while calling all getusers api");
+    console.log("error while calling all getusers api",error);
   }
 };
 
