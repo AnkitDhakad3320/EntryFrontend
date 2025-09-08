@@ -28,21 +28,36 @@ const Thead = styled(TableRow)`
 
 const AllUsers = () => {
   const [users, setUsers] = useState([]);
+   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     getAllUsers();
   }, []);
 
   const getAllUsers = async () => {
-    let response = await getUsers();
-    setUsers(response.data);
+    setLoading(true);
+    try{
+      let response = await getUsers();
+      setUsers(response.data);
+    }catch(error) {
+      console.error("Error fetching users", error);
+    }
+    finally{
+      setLoading(false);
+    }
   };
 
   const deleteUserDetails = async (id) => {
-    await deleteUser(id);
-    getAllUsers();
+    setLoading(true);
+    try {
+      await deleteUser(id);
+      getAllUsers();
+    } catch (error) {
+      console.error("Error deleting user", error);
+      setLoading(false);
+    }
   };
-
+  
   return (
     <StyledTable component={Paper}>
       <Table>
